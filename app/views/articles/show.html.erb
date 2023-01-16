@@ -4,6 +4,10 @@
 </p>
 
 <p>
+  <i><%= @article.user.username if @article.user %></i>
+</p>
+
+<p>
   <strong>Text:</strong>
   <%= @article.text %>
 <p>
