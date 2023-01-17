@@ -1,18 +1,21 @@
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Author</th>
-    <th></th>
-  </tr>
+<div class="col-md-8 blog-main">
   <% articles.each do |article| %>
-    <tr>
-      <td><%= article.title %></td>
-      <td><%= article.text %></td>
-      <td><%= article.user.username if article.user %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
-    </tr>
+    <div class="blog-post">
+      <h2 class="blog-post-title">
+        <%= article.title %>
+      </h2>
+      <p class="blog-post-meta">
+        <%= article.created_at.strftime("%B %e, %Y") %>
+        by <%= link_to article.user.username, user_path(article.user) %>
+      </p>
+
+      <p>
+        <%= link_to 'Show', article_path(article) %>
+        <%= link_to 'Edit', edit_article_path(article) %>
+      </p>
+
+      <%= article.text %>
+    </div>
   <% end %> 
-</table>
+</div>
 
