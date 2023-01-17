@@ -5,5 +5,8 @@
   <%= @user.username %>
 </p>
 
+<h3>Articles</h3>
+<%= render 'articles/article', articles: @user.articles %>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
