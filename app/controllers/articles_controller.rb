@@ -1,4 +1,8 @@
 class ArticlesController < ApplicationController
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+
   def index
     if params.key? :month_year
       date = Date.strptime(params[:month_year], "%B,%Y")
@@ -26,12 +30,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
-
     if @article.update(article_params)
       redirect_to @article
     else
@@ -40,10 +41,25 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+  end
+
+  def destroy
+    @article.destroy
+    redirect_back fallback_location: root_path
   end
 private
   def article_params
     return params.require(:article).permit(:title, :text)
+  end
+
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:alert] = "You do not have permission to modify this article"
+      redirect_to @article
+    end
   end
 end
