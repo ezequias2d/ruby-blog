@@ -9,15 +9,14 @@
     </p>
 
     <p>
-      <%= link_to 'Show', article_path(article) %>
-      
       <% if logged_in? && article.user == current_user %>
         <%= link_to 'Edit', edit_article_path(article) %>
         <%= link_to 'Delete', article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
     </p>
 
-    <%= markdown article.text %>
+    <%= truncate_html(markdown(article.text), length: 280) %>
+    <%= link_to 'Read More', article_path(article) %>
   </div>
 <% end %> 
 
