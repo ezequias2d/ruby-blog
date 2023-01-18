@@ -1,1 +1,19 @@
+<h1>Categories</h1>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <th scope="row">
+          <%= link_to category.name, category %>
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
