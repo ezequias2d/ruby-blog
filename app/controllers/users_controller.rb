@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @articles = @user.articles.paginate(page: params[:page], per_page: 5)
+    @articles = @user.articles.order(:created_at).reverse_order.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /users/new
