@@ -7,11 +7,21 @@ class ArticlesController < ApplicationController
     if params.key? :month_year
       date = Date.strptime(params[:month_year], "%B,%Y")
       date_range = date.beginning_of_month..date.end_of_month
-      @articles = Article.where(created_at: date_range).order(:created_at).reverse_order.paginate(page: params[:page], per_page: 5)
+      @articles = Article
+                    .where(created_at: date_range)
+                    .order(:created_at)
+                    .reverse_order
+                    .paginate(page: params[:page], per_page: 5)
     else
-      @articles = Article.order(:created_at).reverse_order.paginate(page: params[:page], per_page: 5)
+      @articles = Article
+                    .order(:created_at)
+                    .reverse_order
+                    .paginate(page: params[:page], per_page: 5)
     end
-    @archives = Article.group_by_month(:created_at).order(:created_at).reverse_order
+    @archives = Article
+                  .group_by_month(:created_at)
+                  .order(:created_at)
+                  .reverse_order
   end
 
   def new
