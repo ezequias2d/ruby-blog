@@ -50,11 +50,8 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     session[:user_id] = nil
-
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    flash[:notice] = "User was been successfully destroyed"
+    redirect_to articles_path
   end
 
   private
