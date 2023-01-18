@@ -24,6 +24,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'will_paginate', '~> 3.3'
 gem 'redcarpet', '~> 3.5.1'
 gem 'coderay', '~>1.1.3'
+gem 'groupdate', '~>6.1.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
