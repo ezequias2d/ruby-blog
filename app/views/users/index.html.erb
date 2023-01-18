@@ -18,16 +18,15 @@
         <td><%= user.email %></td>
         <% if logged_in? && current_user == user %>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
           <td/>
+        <% end %>
+        <% if logged_in? && (current_user == user || current_user.admin?) %>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
           <td/>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>

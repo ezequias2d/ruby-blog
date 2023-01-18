@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_user, only: [:edit, :update, :destroy]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update]
+  before_action :require_same_user_destroy, only: [:destroy]
   layout "session", only: [:new, :edit]
 
   # GET /users or /users.json
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
-    session[:user_id] = nil
+    session[:user_id] = nil if @user == current_user
     flash[:notice] = "User was been successfully destroyed"
     redirect_to articles_path
   end
@@ -67,6 +68,13 @@ class UsersController < ApplicationController
 
     def require_same_user
       if current_user != @user
+        flash[:alert] = "You do not have permission to modify this user"
+        redirect_to @user
+      end
+    end
+
+    def require_same_user_destroy
+      if current_user != @user && !current_user.admin?
         flash[:alert] = "You do not have permission to modify this user"
         redirect_to @user
       end

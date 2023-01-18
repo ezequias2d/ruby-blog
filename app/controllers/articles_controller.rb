@@ -57,7 +57,7 @@ private
   end
 
   def require_same_user
-    if current_user != @article.user
+    if current_user != @article.user && !current_user.admin?
       flash[:alert] = "You do not have permission to modify this article"
       redirect_to @article
     end
