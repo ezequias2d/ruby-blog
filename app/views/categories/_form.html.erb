@@ -1,0 +1,10 @@
+<%= form_with model: category, local: true do |form| %>
+  <%= render 'shared/errors', obj: category %>
+
+  <div class="form-group">
+    <%= form.label :name, "Category Name" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <%= form.submit class: "btn btn-sm btn-outline-primary"%> 
+<% end %>
