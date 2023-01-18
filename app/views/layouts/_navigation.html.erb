@@ -5,11 +5,11 @@
         <% if logged_in? %>
           <div class="dropdown">
             <a class="text-muted dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%#= "(Admin)" if current_user.admin? %> <%#= current_user.username %>
+              <%#= "(Admin)" if current_user.admin? %> <%= current_user.username %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
-              <%#= link_to "Edit yout profile", edit_user_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Edit profile", edit_user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Delete profile", user_path(current_user), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %>
               </div>
           </div>
@@ -43,9 +43,9 @@
   <div class="nav-scroller py-1 mb-2">
   <nav class="nav d-flex justify-content-between">
     <%= link_to "Bloggers", users_path, class: "p-2 text-muted" %>
-    <%= link_to "View articles", articles_path, class: "p-2 text-muted" %>
+    <%= link_to "Articles", articles_path, class: "p-2 text-muted" %>
     <% if logged_in? %>
-      <%= link_to "Create new article", new_article_path, class: "dropdown-item" %>
+      <%= link_to "New Article", new_article_path, class: "p-2 text-muted" %>
     <% end %>
   </nav>
   </div>

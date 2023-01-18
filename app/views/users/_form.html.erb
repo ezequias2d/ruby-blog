@@ -1,22 +1,32 @@
-<%= form_with(model: user, local: true) do |form| %>
-  <%= render 'shared/errors', obj: @user %>  
+<%= form_with model: user, class: "blog-form-signin", local: true do |f| %>
+  <%= render 'shared/errors', obj: @user %> 
+  <%= link_to image_tag("logo.svg", class: "mb-4", width: 72, height: 72), root_path %>
 
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
-  </div>
+  <h1 class="h3 mb-3 font-weight-normal">
+    <% if @user.new_record? %>
+      Register
+    <% else %>
+      Edit
+    <% end %>
+  </h1>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
+  <%= f.label :username, "Username", class: "sr-only" %>
+  <%= f.text_field :username, class: "form-control", placeholder: "Username", autofocus: true, requied: true %>
+    <br/>
+  <%= f.label :email, "Email address", class: "sr-only" %>
+  <%= f.email_field :email, class: "form-control", placeholder: "Email address", required: true %>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+  <%= f.label :password, "Password", class: "sr-only" %> 
+  <%= f.password_field :password, class: "form-control", placeholder: "Password", required: true %>
+  
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me">
+      Remember me
+    </label>
   </div>
-
-  <div class="actions">
-    <%= form.submit(@user.new_record? ? "Sign up" : "Update account") %>
-  </div>
+  
+  <%= render 'layouts/messages' %>
+  <%= f.submit(@user.new_record? ? "Sign up" : "Update", class: "btn btn-lg btn-outline-secondary") %>
 <% end %>
+

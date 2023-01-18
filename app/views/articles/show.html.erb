@@ -1,17 +1,22 @@
-<p>
-    <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+<div class="col-md-12 blog-main">
+  <div class="blog-post">
+    <h2 class="blog-post-title">
+      <%= @article.title %>
+    </h2>
+    <p class="blog-post-meta">
+      <%= @article.created_at.strftime("%B %e, %Y") %>
+      by <%= link_to @article.user.username, user_path(@article.user) %>
+    </p>
 
-<p>
-  <i><%= @article.user.username if @article.user %></i>
-</p>
+    <p>
+      <%= link_to 'Show', article_path(@article) %>
+      
+      <% if logged_in? && @article.user == current_user %>
+        <%= link_to 'Edit', edit_article_path(@article) %>
+        <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </p>
 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-<p>
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
-
+    <%= @article.text %>
+  </div>
+</div>
