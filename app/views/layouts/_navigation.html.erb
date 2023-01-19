@@ -4,37 +4,78 @@
       <div class="col-4 pt-1"> 
         <% if logged_in? %>
           <div class="dropdown">
-            <a class="text-muted dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= "(Admin)" if current_user.admin? %> <%= current_user.username %>
+            <a 
+               class="text-muted dropdown-toggle" 
+               href="#" 
+               id="navbarDropdown" 
+               role="button" 
+               data-toggle="dropdown" 
+               aria-haspopup="true" 
+               aria-expanded="false">
+              <%= "(Admin)" if current_user.admin? %>
+              <%= current_user.username %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
-              <%= link_to "Edit profile", edit_user_path(current_user), class: "dropdown-item" %>
-              <%= link_to "Delete profile", user_path(current_user), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?" } %>
-              </div>
+              <%= link_to "Profile", 
+                            user_path(current_user), 
+                            class: "dropdown-item" %>
+              <%= link_to "Edit profile", 
+                            edit_user_path(current_user),
+                            class: "dropdown-item" %>
+              <%= link_to "Delete profile",
+                            user_path(current_user), 
+                            class: "dropdown-item text-danger", 
+                            method: :delete, 
+                            data: { confirm: "Are you sure?" } %>
+            </div>
           </div>
-      
-          <%#= link_to "Logout", logout_path, class: "nav-link", method: :delete %>
-          
-        <% else %>
-          <%= link_to "Register", register_path, class: "btn btn-sm btn-outline-secondary" %>
         <% end %>
-      </div>
+      </div> 
       <div class="col-4 text-center">
-        <%= link_to "Blog", root_path, class: "blog-header-logo text-dark"%>
+        <%= link_to "Blog", 
+                      root_path,
+                      class: "blog-header-logo text-dark"%>
       </div>
-      <div class="col-4 d-flex justify-content-end align-items-center search-container">
+      <div class="col-4 d-flex justify-content-end 
+                  align-items-center search-container">
         <form>
-          <input class="search expandright" id="searchright" type="search" name="q" placeholder="Search">
+          <input class="search expandright" 
+                 id="searchright"
+                 type="search" 
+                 name="q" 
+                 placeholder="Search">
           <label class="text-muted" for="searchright">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>  
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                 width="20" 
+                 height="20" 
+                 fill="none" 
+                 stroke="currentColor" 
+                 stroke-linecap="round" 
+                 stroke-linejoin="round" 
+                 stroke-width="2" 
+                 class="mx-3" 
+                 role="img" 
+                 viewBox="0 0 24 24" 
+                 focusable="false">
+              <title>Search</title>
+              <circle cx="10.5" 
+                      cy="10.5" 
+                      r="7.5">
+              </circle>
+              <path d="M21 21l-5.2-5.2"></path>
+            </svg>  
           </label>
         </form>
 
         <% if logged_in? %>
-          <%= link_to "Sign out", signout_path, class: "btn btn-sm btn-outline-secondary", method: :delete %>
+          <%= link_to "Sign out", 
+                        signout_path, 
+                        class: "btn btn-sm btn-outline-secondary", 
+                        method: :delete %>
         <% else %>
-          <%= link_to "Sign in", signin_path, class: "btn btn-sm btn-outline-primary" %>
+          <%= link_to "Sign in", 
+                        signin_path, 
+                        class: "btn btn-sm btn-outline-primary" %>
         <% end %>
       </div>
     </div>
@@ -45,7 +86,33 @@
     <%= link_to "Bloggers", users_path, class: "p-2 text-muted" %>
     <%= link_to "Articles", articles_path, class: "p-2 text-muted" %>
     <% if logged_in? %>
-      <%= link_to "New Article", new_article_path, class: "p-2 text-muted" %>
+    <div class="dropdown">
+      <a 
+          class="text-muted dropdown-toggle" 
+          href="#" 
+          id="navbarDropdown" 
+          role="button" 
+          data-toggle="dropdown" 
+          aria-haspopup="true" 
+          aria-expanded="false">
+          ...
+      </a>
+      <div 
+          class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="navbarDropdown">
+        <% if current_user.admin? %>
+          <%= link_to "New Category", 
+                        new_category_path, 
+                        class: "dropdown-item" %>
+        <% end %>
+        <%= link_to "View Categories",
+                      categories_path,
+                      class: "dropdown-item" %>     
+        <%= link_to "New Article", 
+                      new_article_path, 
+                      class: "dropdown-item" %>
+      </div>
+    </div>
     <% end %>
   </nav>
   </div>
