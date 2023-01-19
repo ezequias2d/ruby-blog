@@ -83,6 +83,11 @@
 
   <div class="nav-scroller py-1 mb-2">
   <nav class="nav d-flex justify-content-between">
+    <% Category.all.each do |category| %>
+      <%= link_to category.name, 
+                    category_path(category),
+                    class: "p-2 text-muted" %>
+    <% end %>
     <%= link_to "Bloggers", users_path, class: "p-2 text-muted" %>
     <%= link_to "Articles", articles_path, class: "p-2 text-muted" %>
     <% if logged_in? %>

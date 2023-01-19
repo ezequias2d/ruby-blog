@@ -12,5 +12,17 @@
     <%= form.text_area :text, class: "form-control" %>
   </div>
 
+  <div class"form-group">
+    <%= form.label :category %>
+    <%= form.collection_select :category_ids,
+                                Category.all,
+                                :id,
+                                :name,
+                                { prompt: "Empty" },
+                                { multiple: true, 
+                                  class:"form-control",
+                                  size: 5 } %> 
+  </div>
+
   <%= form.submit class: "btn btn-sm btn-outline-primary"%> 
 <% end %>

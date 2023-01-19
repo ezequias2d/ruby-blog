@@ -3,15 +3,24 @@
     <h2 class="blog-post-title">
       <%= article.title %>
     </h2>
+    <% if article.categories.any? %>
+      <div>
+        <%= render article.categories %>
+      </div>
+    <% end %>
     <p class="blog-post-meta">
       <%= article.created_at.strftime("%B %e, %Y") %>
       by <%= link_to article.user.username, user_path(article.user) %>
     </p>
 
     <p>
-      <% if logged_in? && (article.user == current_user || current_user.admin?) %>
+    <% if logged_in? && 
+        (article.user == current_user || current_user.admin?) %>
         <%= link_to 'Edit', edit_article_path(article) %>
-        <%= link_to 'Delete', article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Delete', 
+                      article_path(article),
+                      method: :delete, 
+                      data: { confirm: 'Are you sure?' } %>
       <% end %>
     </p>
 
@@ -19,4 +28,3 @@
     <%= link_to 'Read More', article_path(article) %>
   </div>
 <% end %> 
-

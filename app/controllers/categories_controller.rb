@@ -21,6 +21,11 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @articles = @category
+                  .articles
+                  .order(:created_at)
+                  .reverse_order
+                  .paginate(page: params[:page], per_page: 5)
   end
 private
   def category_params

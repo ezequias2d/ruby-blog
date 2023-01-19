@@ -3,10 +3,16 @@
     <h2 class="blog-post-title">
       <%= @article.title %>
     </h2>
+    <% if @article.categories.any? %>
+      <div>
+        <%= render @article.categories %>
+      </div>
+    <% end %>
     <p class="blog-post-meta">
       <%= @article.created_at.strftime("%B %e, %Y") %>
       by <%= link_to @article.user.username, user_path(@article.user) %>
     </p>
+    
 
     <p>
       <%= link_to 'Show', article_path(@article) %>

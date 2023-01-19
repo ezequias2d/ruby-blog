@@ -5,4 +5,6 @@
 
 <h3>Articles</h3>
 <%= render 'articles/article', articles: @articles %>
-<%= will_paginate @articles, renderer: custom_paginate_renderer, page_links: false  %>
+<%= will_paginate @articles, 
+                    renderer: custom_paginate_renderer,
+                    page_links: false  %>

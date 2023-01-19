@@ -1,7 +1,12 @@
 <div class="col-md-12 blog-main">
   <div class="blog-post">
-    <h2 class="blog-post-title">
-      Category <%= @category.name %>
+    <h2 class="text-center">
+      <%= @category.name %>
     </h2>
+
+    <%= render 'articles/article', articles: @articles %>
+    <%= will_paginate @articles, 
+                        renderer: :custom_paginate_renderer,
+                        page_links: false  %>
   </div>
 </div>
