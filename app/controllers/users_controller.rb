@@ -12,7 +12,11 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @articles = @user.articles.order(:created_at).reverse_order.paginate(page: params[:page], per_page: 5)
+    @articles = @user
+                  .articles
+                  .order(:created_at)
+                  .reverse_order
+                  .paginate(page: params[:page], per_page: 5)
   end
 
   # GET /users/new
@@ -30,7 +34,8 @@ class UsersController < ApplicationController
     
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Welcome to the Blog #{@user.username}, you have successfully signed up"
+      flash[:notice] = "Welcome to the Blog #{@user.username}, \
+                          you have successfully signed up"
       redirect_to articles_path
     else
       render 'new'

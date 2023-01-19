@@ -3,6 +3,13 @@
     <h2 class="text-center">
       <%= @category.name %>
     </h2>
+    <% if logged_in? && current_user.admin? %>
+      <div class="text-center">
+        <%= link_to "Edit", edit_category_path(@category) %>
+        <%= link_to "Destroy", @category, method: :delete, 
+          data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
 
     <%= render 'articles/article', articles: @articles %>
     <%= will_paginate @articles, 

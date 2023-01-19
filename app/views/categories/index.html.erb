@@ -4,6 +4,9 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
+      <% if logged_in? && current_user.admin? %>
+        <th scope="col" colspan="2"/>
+      <% end %>
       <th scope="col" class="text-right">Count</th>
     </tr>
   </thead>
@@ -14,6 +17,15 @@
         <th scope="row">
           <%= link_to category.name, category %>
         </th>
+        <% if logged_in? && current_user.admin? %>
+          <td class="text-center">
+            <%= link_to "Edit", edit_category_path(category) %>
+          </td>
+          <td class="text-center">
+            <%= link_to "Destroy", category, method: :delete, 
+              data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
         <td class="text-right">
           <%= category.articles.count %>
         </td>

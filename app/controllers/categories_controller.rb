@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :require_admin, except: [:index, :show]
 
   def new
@@ -27,6 +27,22 @@ class CategoriesController < ApplicationController
                   .reverse_order
                   .paginate(page: params[:page], per_page: 5)
   end
+
+  def edit
+  end
+
+  def update
+    if @category.update category_params
+      flash[:notice] = "Category named updated"
+      redirect_to @category
+    end
+  end
+
+  def destroy
+    @category.destroy
+    redirect_to articles_path
+  end
+
 private
   def category_params
     params.require(:category).permit(:name)
