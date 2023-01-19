@@ -29,6 +29,10 @@
                             data: { confirm: "Are you sure?" } %>
             </div>
           </div>
+        <% else %>
+          <%= link_to "Register",
+                        register_path, 
+                        class: "btn btn-sm btn-outline-secondary" %>
         <% end %>
       </div> 
       <div class="col-4 text-center">
